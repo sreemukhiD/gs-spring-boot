@@ -16,7 +16,7 @@ steps:
     Contents: '**/*.jar'
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
-
+#test
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   inputs:
