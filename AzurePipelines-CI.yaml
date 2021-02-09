@@ -23,10 +23,10 @@ steps:
     PathtoPublish: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 
-#Coverage report generator
-- task: reportgenerator@4
-  displayName: Generate Code Coverage Report
+
+#Publish test results
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage report'
   inputs:
-    reports: $(Build.SourcesDirectory)/**/coverage.cobertura.xml
-    targetdir: $(build.artifactstagingdirectory)/TestResults/
-    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.artifactstagingdirectory)/TestResults/Cobertura.xml'
