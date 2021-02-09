@@ -35,7 +35,7 @@ steps:
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
   displayName: Generate Code Coverage Report
   inputs:
-    reports: $(Build.SourcesDirectory)/tests/**/coverage.cobertura.xml
+    reports: $(Build.SourcesDirectory)/tests/**/coverage.cobertura.html
     targetdir: $(build.artifactstagingdirectory)/TestResults/
     reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
 
