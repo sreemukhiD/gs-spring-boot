@@ -32,10 +32,11 @@ steps:
       **/tests/*.Tests/*.csproj
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Include="[ProjectName.*]*" /p:Exclude="[*Tests]*"'
 
-- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
+#Coverage report generator
+- task: reportgenerator@4
   displayName: Generate Code Coverage Report
   inputs:
-    reports: $(Build.SourcesDirectory)/tests/**/coverage.cobertura.html
+    reports: $(Build.SourcesDirectory)/**/coverage.cobertura.xml
     targetdir: $(build.artifactstagingdirectory)/TestResults/
     reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
 
