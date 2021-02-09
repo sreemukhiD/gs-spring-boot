@@ -23,6 +23,13 @@ steps:
     PathtoPublish: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 
+- task: NuGetCommand@2
+  inputs:
+        command: 'restore'
+        restoreSolution: '**/*.sln'
+        feedsToUse: 'select'
+        vstsFeed: 'c85b148b-1c99-4ca5-8085-0e9905c7ad25'
+
 #Coverage report generator
 - task: reportgenerator@4
   displayName: Generate Code Coverage Report
@@ -37,9 +44,3 @@ steps:
   inputs:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.artifactstagingdirectory)/TestResults/Cobertura.xml'
-- task: NuGetCommand@2
-  inputs:
-        command: 'restore'
-        restoreSolution: '**/*.sln'
-        feedsToUse: 'select'
-        vstsFeed: 'c85b148b-1c99-4ca5-8085-0e9905c7ad25'
