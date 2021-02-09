@@ -30,7 +30,7 @@ steps:
   displayName: 'Run test.'
   inputs:
     command: test
-    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura/p:CoverletOutput=$(BuildSourcesDirectory)/TestResults/Coverage/'
     publishTestResults: true
     
 #Coverage report generator
