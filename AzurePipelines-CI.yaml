@@ -29,14 +29,6 @@ steps:
   inputs:
     Version: '3.1.x'
     PackageType: sdk
-
-#Run tests
-- task: DotNetCoreCLI@2
-  displayName: 'Run test.'
-  inputs:
-    command: test
-    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura/p:CoverletOutput=$(BuildSourcesDirectory)/TestResults/Coverage/'
-    publishTestResults: true
     
 #Coverage report generator
 - task: reportgenerator@4
