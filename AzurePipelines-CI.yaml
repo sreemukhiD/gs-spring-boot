@@ -24,6 +24,19 @@ steps:
     PathtoPublish: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 
+- powershell: |
+        "install tools:"
+        &dotnet tool install coverlet.console --tool-path . --version 1.5.3
+
+        "`nrun tests:"
+        $unitTestFile = gci -Recurse | ?{ $_.FullName -like "*bin\*test.dll" }
+        Write-Host "`$unitTestFile value: $unitTestFile"
+
+        $coverlet = "$pwd\coverlet.exe"
+
+        "calling $coverlet for $($unitTestFile.FullName)"
+        &$coverlet $unitTestFile.FullName --target "dotnet" --targetargs "vstest $($unitTestFile.FullName) --logger:trx" --format "cobertura"
+
 #Publish test results
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage report'
