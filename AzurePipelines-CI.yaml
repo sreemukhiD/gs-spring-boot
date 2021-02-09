@@ -37,6 +37,7 @@ steps:
     command: test
     arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
     publishTestResults: true
+    projects: '**/test-library/*.Javaproject-CI'
 
 #Coverage report generator
 - task: reportgenerator@4
