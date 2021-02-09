@@ -38,6 +38,7 @@ steps:
     reports: $(Build.SourcesDirectory)/**/coverage.cobertura.xml
     targetdir: $(build.artifactstagingdirectory)/TestResults/
     reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+    assemblyfilters: '-xunit\*'
 
 #Publish test results
 - task: PublishCodeCoverageResults@1
