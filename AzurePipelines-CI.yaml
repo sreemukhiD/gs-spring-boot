@@ -16,12 +16,14 @@ steps:
     Contents: '**/*.jar'
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
+
 #test
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
+
 #Run tests
 - task: DotNetCoreCLI@2
   displayName: 'Run test.'
