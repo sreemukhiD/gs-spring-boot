@@ -22,13 +22,13 @@ steps:
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
+#Run tests
 - task: DotNetCoreCLI@2
-  displayName: dotnet test
+  displayName: 'Run test.'
   inputs:
     command: test
     arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
-    projects: 'tests/\*\*/\*.csproj'
-    nobuild: true
+    publishTestResults: true
 
 #Coverage report generator
 - task: reportgenerator@4
