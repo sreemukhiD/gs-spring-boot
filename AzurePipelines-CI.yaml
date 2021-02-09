@@ -30,3 +30,18 @@ steps:
     projects: 'tests/\*\*/\*.csproj'
     nobuild: true
 
+#Coverage report generator
+- task: reportgenerator@4
+  displayName: Generate Code Coverage Report
+  inputs:
+    reports: $(Build.SourcesDirectory)/**/coverage.cobertura.xml
+    targetdir: $(build.artifactstagingdirectory)/TestResults/
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+
+#Publish test results
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage report'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.artifactstagingdirectory)/TestResults/Cobertura.xml'
+
