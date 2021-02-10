@@ -40,6 +40,15 @@ steps:
     publishTestResults: true
     projects: '**/test-library/*.Javaproject-CI'
 
+# Run tests and create coverage report'
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: 'src\ReportGenerator.Core.Test\ReportGenerator.Core.Test.csproj'
+    arguments: '--configuration $(BuildConfiguration) --no-build /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../target/reports/coverage/'
+
+
 #Coverage report generator
 - task: reportgenerator@4
   displayName: Generate Code Coverage Report
