@@ -3,6 +3,13 @@ pool:
   demands: maven
 
 steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+steps:
 - task: Maven@3
   displayName: 'Maven app/pom.xml'
   inputs:
