@@ -2,12 +2,6 @@ pool:
   vmImage: 'ubuntu-16.04' # Hosted Ubuntu 1604
   demands: maven
 
-steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
 
 steps:
 - task: Maven@3
@@ -15,6 +9,11 @@ steps:
   inputs:
     mavenPomFile: 'app/pom.xml'
     codeCoverageToolOption: Cobertura
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
